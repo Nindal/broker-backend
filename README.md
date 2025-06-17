@@ -26,6 +26,18 @@ This is the backend API service for a multi-stock broker platform built with Go.
 
 ## 🗂 Project Structure
 
+broker-backend/
+├── cmd/server/ # Entry point
+├── db/ # Database init and migrations
+├── handlers/ # HTTP handlers
+├── middleware/ # JWT Middleware
+├── models/ # Struct models
+├── utils/ # JWT, mock data, circuit breaker
+├── Dockerfile
+├── docker-compose.yml
+├── go.mod / go.sum
+└── .env.example
+
 
 ## 🔐 Authentication
 
@@ -36,8 +48,22 @@ This is the backend API service for a multi-stock broker platform built with Go.
 ## 🚀 Getting Started
 
 ### 1. Clone and Set Up
-
-```bash
 git clone https://github.com/yourusername/broker-backend.git
 cd broker-backend
 cp .env.example .env
+
+Update .env with your secrets if needed.
+
+2. Run with Docker
+bash
+Copy
+Edit
+docker-compose up --build
+The backend will run on http://localhost:8080
+
+PostgreSQL is exposed on port 5432.
+
+3. Migrate the DB
+Once PostgreSQL is up:
+docker exec -i <db_container_id> psql -U broker -d broker < db/migrations/init.sql
+Or automate it with a migration tool of your choice.
